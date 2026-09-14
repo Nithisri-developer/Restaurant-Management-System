@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% extends 'customer_base.html' %}
+{% load static %}
+
+{% block title %}Your Cart{% endblock %}
+
+{% block content %}
+
+<section class="cart-page">
+
+    <div class="cart-header">
+        <p class="cart-label">YOUR ORDER</p>
+        <h1>Your Cart</h1>
+        <p>Review your selected dishes before checkout.</p>
+    </div>
+
+    {% if cart_items %}
+
+    <div class="cart-layout">
+
+        <div class="cart-items">
+
+            {% for item in cart_items %}
+
+            <div class="cart-item">
+
+                <div class="cart-item-image">
+
+                    <img
+                        src="{% static 'assets/images/' %}{{ item.product.menu_image }}"
+                        alt="{{ item.product.product_name }}"
+                    >
+
+                </div>
+
+
+                <div class="cart-item-details">
+
+                    <p class="cart-food-style">
+                        {{ item.product.food_style }}
+                    </p>
+
+                    <h2>
+                        {{ item.product.product_name }}
+                    </h2>
+
+                    <p class="cart-food-type">
+                        {{ item.product.food_type }}
+                    </p>
+
+                </div>
+
+
+                <div class="cart-item-price">
+
+                    <span>₹{{ item.product.price }}</span>
+
+                    <div class="quantity-controls">
+
+                        <a href="{% url 'decrease_cart' item.product.id %}"
+                           class="quantity-btn">
+                            −
+                        </a>
+
+                        <span class="quantity-number">
+                            {{ item.quantity }}
+                        </span>
+
+                        <a href="{% url 'increase_cart' item.product.id %}"
+                           class="quantity-btn">
+                            +
+                        </a>
+
+                    </div>
+
+                    <a href="{% url 'remove_from_cart' item.product.id %}"
+                       class="remove-cart-btn">
+                        Remove
+                    </a>
+
+                </div>
+
+
+                <div class="cart-item-subtotal">
+
+                    ₹{{ item.subtotal }}
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <div class="cart-summary">
+
+            <p class="summary-label">
+                ORDER SUMMARY
+            </p>
+
+            <div class="summary-row">
+                <span>Items</span>
+                <span>{{ item_count }}</span>
+            </div>
+
+            <div class="summary-divider"></div>
+
+            <div class="summary-total">
+                <span>Total</span>
+                <strong>₹{{ total }}</strong>
+            </div>
+
+<a href="{% url 'checkout' %}" class="checkout-btn">
+    Proceed to Checkout
+</a>
+
+        </div>
+
+    </div>
+
+
+    {% else %}
+
+    <div class="empty-cart">
+
+        <div class="empty-cart-icon">
+            🛒
+        </div>
+
+        <h2>Your cart is empty</h2>
+
+        <p>
+            Looks like you haven't added anything yet.
+        </p>
+
+        <a href="{% url 'menu' %}" class="back-menu-btn">
+            Explore Menu
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}
+</body>
+</html>

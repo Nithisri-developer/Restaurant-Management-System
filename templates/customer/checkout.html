@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% extends 'customer_base.html' %}
+{% load static %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+
+<section class="checkout-page">
+
+    <div class="checkout-header">
+
+        <p class="checkout-label">
+            FINAL STEP
+        </p>
+
+        <h1>
+            Checkout
+        </h1>
+
+        <p>
+            Review your order before placing it.
+        </p>
+
+    </div>
+
+
+    {% if cart_items %}
+
+    <div class="checkout-layout">
+
+        <!-- ORDER ITEMS -->
+
+        <div class="checkout-items">
+
+            <h2>
+                Your Order
+            </h2>
+
+            {% for item in cart_items %}
+
+            <div class="checkout-item">
+
+                <div class="checkout-item-image">
+
+                    <img
+                        src="{% static 'assets/images/' %}{{ item.product.menu_image }}"
+                        alt="{{ item.product.product_name }}"
+                    >
+
+                </div>
+
+                <div class="checkout-item-details">
+
+                    <h3>
+                        {{ item.product.product_name }}
+                    </h3>
+
+                    <p>
+                        {{ item.product.food_style }}
+                    </p>
+
+                    <span>
+                        Quantity: {{ item.quantity }}
+                    </span>
+
+                </div>
+
+                <div class="checkout-item-price">
+                    ₹{{ item.subtotal }}
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- ORDER SUMMARY -->
+
+        <div class="checkout-summary">
+
+            <p class="summary-label">
+                ORDER SUMMARY
+            </p>
+
+            <div class="summary-row">
+
+                <span>
+                    Subtotal
+                </span>
+
+                <span>
+                    ₹{{ total }}
+                </span>
+
+            </div>
+
+            <div class="summary-divider"></div>
+
+            <div class="summary-total">
+
+                <span>
+                    Total
+                </span>
+
+                <strong>
+                    ₹{{ total }}
+                </strong>
+
+            </div>
+
+
+            <form method="POST" action="{% url 'place_order' %}">
+
+                {% csrf_token %}
+
+                <button type="submit" class="place-order-btn">
+                    Place Order
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    {% else %}
+
+    <div class="empty-cart">
+
+        <div class="empty-cart-icon">
+            🛒
+        </div>
+
+        <h2>
+            Your cart is empty
+        </h2>
+
+        <p>
+            Add some dishes before checking out.
+        </p>
+
+        <a href="{% url 'menu' %}" class="back-menu-btn">
+            Explore Menu
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}
+</body>
+</html>

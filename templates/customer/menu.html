@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% extends 'customer_base.html' %}
+{% load static %}
+
+{% block title %}Menu{% endblock %}
+
+{% block content %}
+
+<section class="menu-page">
+
+    <div class="menu-header">
+        <p class="menu-label">OUR MENU</p>
+
+        <h1>Something for every craving.</h1>
+
+        <p>
+            Explore dishes from different cuisines,
+            freshly prepared for every kind of food lover.
+        </p>
+    </div>
+
+
+    <!-- FOOD STYLE FILTERS -->
+
+    <div class="filter-section">
+
+        <div class="filter-title">
+            Food Style
+        </div>
+
+        <div class="filter-buttons">
+
+            <button class="filter-btn active" data-style="all">
+                All
+            </button>
+
+            <button class="filter-btn" data-style="Indian">
+                Indian
+            </button>
+
+            <button class="filter-btn" data-style="Chinese">
+                Chinese
+            </button>
+
+            <button class="filter-btn" data-style="Italian">
+                Italian
+            </button>
+
+            <button class="filter-btn" data-style="Japanese">
+                Japanese
+            </button>
+
+            <button class="filter-btn" data-style="Mexican">
+                Mexican
+            </button>
+
+            <button class="filter-btn" data-style="French">
+                French
+            </button>
+
+            <button class="filter-btn" data-style="Western">
+                Western
+            </button>
+
+            <button class="filter-btn" data-style="Beverages & Desserts">
+                Beverages & Desserts
+            </button>
+
+        </div>
+
+
+        <div class="filter-title diet-title">
+            Food Type
+        </div>
+
+        <div class="filter-buttons">
+
+            <button class="diet-btn active" data-type="all">
+                All
+            </button>
+
+            <button class="diet-btn veg-btn" data-type="Vegetarian">
+                <span></span>
+                Vegetarian
+            </button>
+
+            <button class="diet-btn nonveg-btn" data-type="Non-Vegetarian">
+                <span></span>
+                Non-Vegetarian
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- MENU GRID -->
+
+    <div class="menu-grid" id="menuGrid">
+
+        {% for product in products %}
+
+        <div
+            class="menu-card"
+            data-style="{{ product.food_style }}"
+            data-type="{{ product.food_type }}"
+        >
+
+            <div class="menu-image">
+
+                <img
+                    src="{% static 'assets/images/' %}{{ product.menu_image }}"
+                    alt="{{ product.product_name }}"
+                >
+
+                <div class="food-badge
+                    {% if product.food_type == 'Vegetarian' %}
+                        veg
+                    {% else %}
+                        nonveg
+                    {% endif %}
+                ">
+
+                    {% if product.food_type == 'Vegetarian' %}
+
+                        <span></span> Veg
+
+                    {% else %}
+
+                        <span></span> Non-Veg
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <div class="menu-card-content">
+
+                <p class="food-style">
+                    {{ product.food_style }}
+                </p>
+
+                <h2>
+                    {{ product.product_name }}
+                </h2>
+
+
+                <div class="menu-bottom">
+
+                    <div class="menu-price">
+                        ₹{{ product.price }}
+                    </div>
+
+
+                    {% if product.stock > 0 %}
+
+                    <a
+                        href="{% url 'add_to_cart' product.id %}"
+                        class="cart-btn"
+                    >
+                        Add to Cart
+                    </a>
+
+                    {% else %}
+
+                    <span class="out-of-stock">
+                        Out of Stock
+                    </span>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty-menu">
+
+            <h2>No dishes available.</h2>
+
+            <p>Please check back later.</p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+
+<script>
+
+let selectedStyle = "all";
+let selectedType = "all";
+
+
+function filterMenu() {
+
+    const cards = document.querySelectorAll(".menu-card");
+
+    cards.forEach(card => {
+
+        const style = card.dataset.style;
+        const type = card.dataset.type;
+
+        const styleMatch =
+            selectedStyle === "all" ||
+            style === selectedStyle;
+
+        const typeMatch =
+            selectedType === "all" ||
+            type === selectedType;
+
+        if (styleMatch && typeMatch) {
+
+            card.style.display = "";
+
+        } else {
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+/* FOOD STYLE */
+
+document.querySelectorAll(".filter-btn").forEach(button => {
+
+    button.addEventListener("click", function() {
+
+        document
+            .querySelectorAll(".filter-btn")
+            .forEach(btn => btn.classList.remove("active"));
+
+        this.classList.add("active");
+
+        selectedStyle = this.dataset.style;
+
+        filterMenu();
+
+    });
+
+});
+
+
+/* VEG / NON-VEG */
+
+document.querySelectorAll(".diet-btn").forEach(button => {
+
+    button.addEventListener("click", function() {
+
+        document
+            .querySelectorAll(".diet-btn")
+            .forEach(btn => btn.classList.remove("active"));
+
+        this.classList.add("active");
+
+        selectedType = this.dataset.type;
+
+        filterMenu();
+
+    });
+
+});
+
+</script>
+
+{% endblock %}
+</body>
+</html>

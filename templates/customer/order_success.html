@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% extends 'customer_base.html' %}
+
+{% block title %}Order Successful{% endblock %}
+
+{% block content %}
+
+<section class="order-success-page">
+
+    <div class="success-card">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+        <p class="success-label">ORDER CONFIRMED</p>
+
+        <h1>Order Placed Successfully</h1>
+
+        <p class="success-message">
+            Thank you for your order. Your order has been received successfully.
+        </p>
+
+        <div class="success-actions">
+
+            <a href="{% url 'menu' %}" class="success-menu-btn">
+                Continue Shopping
+            </a>
+
+            <a href="{% url 'customer_home' %}" class="success-home-btn">
+                Back to Home
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+</body>
+</html>

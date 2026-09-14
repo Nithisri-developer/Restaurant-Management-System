@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% extends 'customer_base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="cafe-hero">
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+<br><br>
+        <p class="hero-small">WELCOME TO OUR RESTAURANT</p><br>
+
+        <h2>" Where Every Meal<br>Feels Like Home. "</h2><br><br>
+
+        <p class="hero-text">
+            Fresh ingredients, thoughtfully crafted dishes,
+            and memorable dining experiences made just for you.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="{% url 'menu' %}" class="cafe-btn primary-btn">Explore Our Menu</a>
+            <a href="{% url 'booking' %}" class="book-table-btn">
+                Book a Table
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="about-section">
+
+    <div class="about-image">
+        <img src="{% static 'assets/images/3.jpg' %}" alt="Dining at our restaurant">
+    </div>
+
+    <div class="about-content">
+
+        <!-- <p class="section-label">OUR STORY</p> -->
+
+        <h2>Good food.<br>Great moments.</h2>
+
+        <p>
+            We believe a restaurant should be more than just a place to eat.
+            From carefully selected ingredients to thoughtfully prepared dishes,
+            everything is created to make every visit worth remembering.
+        </p>
+
+        <!-- <a href="#" class="story-btn">Discover Our Story</a> -->
+
+    </div>
+
+</section>
+
+{% endblock %}
+</body>
+</html>

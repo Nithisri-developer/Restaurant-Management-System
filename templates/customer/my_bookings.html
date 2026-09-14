@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body{% extends 'customer_base.html' %}
+
+{% block title %}My Bookings{% endblock %}
+
+{% block content %}
+
+<style>
+
+   .my-bookings-page {
+    min-height: 85vh;
+    padding: 70px 7%;
+    background: #a28b80;
+}
+
+    .bookings-header {
+        text-align: center;
+        margin-bottom: 45px;
+    }
+
+    .bookings-header h1 {
+        margin: 0 0 12px;
+        color: #33271f;
+        font-family: Georgia, serif;
+        font-size: 40px;
+        font-weight: 500;
+    }
+
+    .bookings-header p {
+        margin: 0;
+        color: #150a01;
+        font-size: 15px;
+    }
+
+    .bookings-list {
+        max-width: 900px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .booking-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 30px;
+        padding: 28px 32px;
+        background: rgba(255, 255, 255, 0.78);
+        border: 1px solid #ded2c5;
+        box-shadow: 0 10px 30px rgba(60, 45, 35, 0.07);
+        transition: 0.25s ease;
+    }
+
+    .booking-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 35px rgba(60, 45, 35, 0.11);
+    }
+
+    .booking-info h2 {
+        margin: 0 0 18px;
+        color: #3a2d24;
+        font-family: Georgia, serif;
+        font-size: 22px;
+        font-weight: 500;
+    }
+
+    .booking-info p {
+        margin: 7px 0;
+        color: #6d6259;
+        font-size: 14px;
+    }
+
+    .booking-info strong {
+        color: #493a30;
+    }
+
+    .booking-status {
+        min-width: 120px;
+        text-align: center;
+    }
+
+    .booking-status span {
+        display: inline-block;
+        padding: 9px 18px;
+        border: 1px solid #c8a982;
+        color: #765e43;
+        background: #eee5db;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+    }
+
+    .no-bookings {
+        max-width: 550px;
+        margin: 50px auto;
+        padding: 50px 30px;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.78);
+        border: 1px solid #ded2c5;
+    }
+
+    .no-bookings h2 {
+        margin-bottom: 12px;
+        color: #3a2d24;
+        font-family: Georgia, serif;
+        font-weight: 500;
+    }
+
+    .no-bookings p {
+        margin-bottom: 25px;
+        color: #75685e;
+    }
+
+    .no-bookings a {
+        display: inline-block;
+        padding: 12px 24px;
+        background: #3a2d24;
+        color: #f8f3ee;
+        text-decoration: none;
+        font-size: 13px;
+        transition: 0.25s ease;
+    }
+
+    .no-bookings a:hover {
+        background: #59463a;
+    }
+
+    @media (max-width: 650px) {
+
+        .my-bookings-page {
+            padding: 50px 20px;
+        }
+
+        .bookings-header h1 {
+            font-size: 32px;
+        }
+
+        .booking-card {
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 25px;
+        }
+
+        .booking-status {
+            min-width: auto;
+        }
+
+    }
+
+</style>
+
+
+<div class="my-bookings-page">
+
+    <div class="bookings-header">
+<br><br>
+        <h1>My Bookings</h1>
+
+        <p>
+            Your table reservations, all in one place.
+        </p>
+
+    </div>
+
+
+    {% if bookings %}
+
+        <div class="bookings-list">
+
+            {% for booking in bookings %}
+
+                <div class="booking-card">
+
+                    <div class="booking-info">
+
+                        <h2>Table Reservation</h2>
+
+                        <p>
+                            <strong>Date:</strong>
+                            {{ booking.date }}
+                        </p>
+
+                        <p>
+                            <strong>Time:</strong>
+                            {{ booking.time }}
+                        </p>
+
+                        <p>
+                            <strong>Guests:</strong>
+                            {{ booking.guests }}
+                        </p>
+
+                        {% if booking.special_request %}
+
+                            <p>
+                                <strong>Special Request:</strong>
+                                {{ booking.special_request }}
+                            </p>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="booking-status">
+
+                        <span>
+                            {{ booking.status }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="no-bookings">
+
+            <h2>No bookings yet</h2>
+
+            <p>
+                You haven't made any table reservations.
+            </p>
+
+            <a href="{% url 'booking' %}">
+                Book a Table
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% extends 'customer_base.html' %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+
+<section class="about-page">
+
+    <div class="about-header">
+
+        <p class="about-label">
+            OUR STORY
+        </p>
+
+        <h1>
+            Good Food.<br>
+            Made With Purpose.
+        </h1>
+
+        <p>
+            At NPP, we believe great food is more than something
+            you eat. It is an experience worth remembering.
+        </p>
+
+    </div>
+
+
+    <!-- ABOUT CARDS -->
+
+    <div class="about-content">
+
+        <div class="about-card">
+
+            <h2>
+                Our Kitchen
+            </h2>
+
+            <p>
+                We bring together flavours from different cuisines,
+                prepared with care and served with attention to detail.
+            </p>
+
+        </div>
+
+
+        <div class="about-card">
+
+            <h2>
+                Our Promise
+            </h2>
+
+            <p>
+                From the ingredients we choose to the food we serve,
+                quality and a memorable dining experience come first.
+            </p>
+
+        </div>
+
+
+        <div class="about-card">
+
+            <h2>
+                Our Experience
+            </h2>
+
+            <p>
+                Whether you're enjoying a quick meal or gathering
+                around the table, we're here to make it special.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- LOCATION -->
+
+    <div class="about-location">
+
+        <div class="location-info">
+
+            <p class="location-label">
+                FIND US
+            </p>
+
+            <h2>
+                Visit NPP
+            </h2>
+
+            <p class="location-text">
+                Come by and enjoy a memorable meal with us.
+            </p>
+
+            <div class="location-address">
+
+                <strong>
+                    NPP Restaurant
+                </strong>
+
+                <span>
+                    No. 7, OKR Street
+                </span>
+
+                <span>
+                    Velayuthampalayam, Karur
+                </span>
+
+                <span>
+                    Tamil Nadu - 639117
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="location-map">
+
+            <iframe
+                src="https://www.google.com/maps?q=No+7+OKR+Street+Velayuthampalayam+Karur+639117&output=embed"
+                loading="lazy"
+                allowfullscreen>
+            </iframe>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
+</body>
+</html>

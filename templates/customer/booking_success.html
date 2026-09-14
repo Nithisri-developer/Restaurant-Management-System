@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% extends 'customer_base.html' %}
+
+{% block title %}Booking Confirmed{% endblock %}
+
+{% block content %}
+
+<style>
+    .booking-success {
+        min-height: 85vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 20px;
+        background: #f6f1eb;
+    }
+
+    .success-box {
+        width: 100%;
+        max-width: 520px;
+        padding: 55px 40px;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.75);
+        border: 1px solid #ded2c5;
+        box-shadow: 0 15px 45px rgba(60, 45, 35, 0.10);
+    }
+
+    .success-icon {
+        width: 65px;
+        height: 65px;
+        margin: 0 auto 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #b89b78;
+        border-radius: 50%;
+        color: #8c7357;
+        font-size: 30px;
+    }
+
+    .success-box h1 {
+        margin-bottom: 15px;
+        color: #33271f;
+        font-family: Georgia, serif;
+        font-size: 34px;
+        font-weight: 500;
+    }
+
+    .success-box p {
+        margin: 8px 0;
+        color: #6d6259;
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    .success-box .status {
+        margin: 22px 0 30px;
+        padding: 14px;
+        background: #eee5db;
+        color: #5c4c3e;
+    }
+
+    .success-btn,
+    .secondary-btn {
+        display: inline-block;
+        margin: 5px;
+        padding: 12px 22px;
+        text-decoration: none;
+        font-size: 13px;
+        letter-spacing: 0.5px;
+        transition: 0.25s ease;
+    }
+
+    .success-btn {
+        background: #3a2d24;
+        color: #f8f3ee;
+        border: 1px solid #3a2d24;
+    }
+
+    .success-btn:hover {
+        background: #59463a;
+    }
+
+    .secondary-btn {
+        background: transparent;
+        color: #5b493b;
+        border: 1px solid #b9a38d;
+    }
+
+    .secondary-btn:hover {
+        background: #e8ddd2;
+    }
+
+    @media (max-width: 600px) {
+        .success-box {
+            padding: 40px 22px;
+        }
+
+        .success-box h1 {
+            font-size: 28px;
+        }
+
+        .success-btn,
+        .secondary-btn {
+            display: block;
+            margin: 8px 0;
+        }
+    }
+</style>
+
+<div class="booking-success">
+
+    <div class="success-box">
+
+        <div class="success-icon">✓</div>
+
+        <h1>Table Reserved!</h1>
+
+        <p>
+            Your table reservation has been received successfully.
+        </p>
+
+        <p class="status">
+            Your booking is currently <strong>Pending</strong>.
+            We'll confirm it shortly.
+        </p>
+
+        <a href="{% url 'customer_home' %}" class="success-btn">
+            Back to Home
+        </a>
+
+        <a href="{% url 'booking' %}" class="secondary-btn">
+            Book Another Table
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}
+</body>
+</html>
